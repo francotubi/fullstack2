@@ -1,0 +1,1 @@
+Para iniciar: abre una terminal dentro de DeliveryApp-React, ejecuta npm install y luego npm run dev. Abre la dirección que muestre Vite. No usar Live Server ni doble clic en index.html. Para pruebas: npm test, en otra terminal. Administrador: admin@duoc.cl / Admin123. Consulta README.md para conservar el historial del repositorio.
