@@ -79,3 +79,7 @@ aside .nav-link:hover {
 #cart-count {
     font-size: 1.1rem;
 }
+/* Mantener las imágenes del blog dentro de la tarjeta en pantallas pequeñas. */
+@media (max-width: 767.98px) {
+ .card-img-left { width: 100% !important; height: 200px; object-fit: cover; }
+}

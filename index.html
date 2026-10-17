@@ -1,46 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeliveryApp - Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="d-flex flex-column min-vh-100 bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">🍔 DeliveryApp</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="blog.html">Blogs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                </ul>
-                <div class="d-flex gap-2">
-                    <a href="login.html" class="btn btn-outline-light">Iniciar Sesión</a>
-                    <a href="carrito.html" class="btn btn-light text-danger fw-bold">🛒 (<span id="cart-count">0</span>)</a>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            DeliveryApp - Home
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="scripts/auth.js">
+        </script>
+        <script src="scripts/productos-store.js">
+        </script>
+    </head>
+    <body class="d-flex flex-column min-vh-100 bg-light">
+        <nav aria-label="Navegación principal" class="navbar navbar-expand-lg navbar-dark bg-danger">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="index.html">
+                    🍔 DeliveryApp
+                </a>
+                <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon">
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="productos.html">
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="nosotros.html">
+                                Nosotros
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">
+                                Blogs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">
+                                Contacto
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="login.html" class="btn btn-outline-light">
+                            Iniciar Sesión
+                        </a>
+                        <a href="registro.html" class="btn btn-outline-light">
+                            Crear cuenta
+                        </a>
+                        <a href="carrito.html" class="btn btn-light text-danger fw-bold">
+                            🛒 (
+                            <span id="cart-count">
+                                0
+                            </span>
+                            )
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    <main class="flex-grow-1">
-        <section class="bg-dark text-white text-center py-5">
-            <div class="container py-5">
-                <h1 class="display-4 fw-bold">Pide lo que se te ocurra</h1>
-                <p class="lead">Las mejores categorías de comida rápida y saludable.</p>
-                <a href="productos.html" class="btn btn-danger btn-lg mt-3">Ver Menú</a>
-            </div>
-        </section>
-        <section class="container py-5 text-center">
-            <h2 class="mb-4 fw-bold">Productos Destacados</h2>
-            <div id="product-container" class="row g-4"><!-- Inyectado por JS --></div>
-        </section>
-    </main>
-    <footer class="bg-dark text-white text-center py-3"><p class="mb-0">&copy; 2024 DeliveryApp</p></footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="scripts/main.js"></script>
-</body>
+        </nav>
+        <main class="flex-grow-1">
+            <section class="bg-dark text-white text-center py-5">
+                <div class="container py-5">
+                    <h1 class="display-4 fw-bold">
+                        Pide lo que se te ocurra
+                    </h1>
+                    <p class="lead">
+                        Las mejores categorías de comida rápida y saludable.
+                    </p>
+                    <a href="productos.html" class="btn btn-danger btn-lg mt-3">
+                        Ver Menú
+                    </a>
+                </div>
+            </section>
+            <section class="container py-5 text-center">
+                <h2 class="mb-4 fw-bold">
+                    Productos Destacados
+                </h2>
+                <div id="product-container" class="row g-4">
+                    <!-- Inyectado por JS -->
+                </div>
+            </section>
+        </main>
+        <footer class="bg-dark text-white text-center py-3">
+            <p class="mb-0">
+                &copy;
+                2024 DeliveryApp
+            </p>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+        </script>
+        <script src="scripts/main.js">
+        </script>
+        <script src="scripts/navegacion.js">
+        </script>
+    </body>
 </html>

@@ -1,80 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard - DeliveryApp</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="d-flex" style="height: 100vh; overflow: hidden;">
-    <aside class="bg-dark text-white p-3 d-flex flex-column" style="width: 250px;">
-        <h3 class="fw-bold mb-4 text-danger">Panel Admin</h3>
-        <nav class="nav flex-column gap-2">
-            <a class="nav-link text-white bg-danger rounded" href="admin-home.html">Dashboard</a>
-            <a class="nav-link text-white" href="admin-productos.html">Lista Productos</a>
-            <a class="nav-link text-white" href="admin-producto-form.html">Nuevo Producto</a>
-            <a class="nav-link text-white" href="admin-usuarios.html">Lista Usuarios</a>
-            <a class="nav-link text-white" href="admin-usuario-form.html">Nuevo Usuario</a>
-        </nav>
-        <a href="index.html" class="btn btn-outline-light mt-auto">← Volver a Tienda</a>
-    </aside>
-    <main class="flex-fill p-5 bg-light overflow-auto">
-        <h1 class="mb-4 fw-bold">Registrar Nuevo Usuario</h1>
-        <div class="card shadow-sm p-4" style="max-width: 600px;">
-            <form id="form-admin-usuario">
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="RUN (Ej: 19011022K sin puntos ni guion)" required>
-                </div>
-                
-                <div class="row g-3 mb-3">
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Nombre (Max 50)" required>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>
+            Dashboard - DeliveryApp
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="scripts/auth.js">
+        </script>
+        <script src="scripts/productos-store.js">
+        </script>
+    </head>
+    <body class="d-flex" style="height: 100vh; overflow: hidden;">
+        <aside class="bg-dark text-white p-3 d-flex flex-column" style="width: 250px;">
+            <h3 class="fw-bold mb-4 text-danger">
+                Panel Admin
+            </h3>
+            <nav class="nav flex-column gap-2">
+                <a class="nav-link text-white bg-danger rounded" href="admin-home.html">
+                    Dashboard
+                </a>
+                <a class="nav-link text-white" href="admin-productos.html">
+                    Lista Productos
+                </a>
+                <a class="nav-link text-white" href="admin-producto-form.html">
+                    Nuevo Producto
+                </a>
+                <a class="nav-link text-white" href="admin-usuarios.html">
+                    Lista Usuarios
+                </a>
+                <a class="nav-link text-white" href="admin-usuario-form.html">
+                    Nuevo Usuario
+                </a>
+            </nav>
+            <a href="index.html" class="btn btn-outline-light mt-auto">
+                ← Volver a Tienda
+            </a>
+        </aside>
+        <main class="flex-fill p-5 bg-light overflow-auto">
+            <h1 class="mb-4 fw-bold">
+                Registrar Nuevo Usuario
+            </h1>
+            <div class="card shadow-sm p-4" style="max-width: 600px;">
+                <form id="form-admin-usuario" novalidate>
+                    <div class="mb-3">
+                        <label for="run" class="form-label">
+                            RUN (sin puntos ni guion)
+                        </label>
+                        <input type="text" class="form-control" placeholder="RUN (Ej: 19011022K sin puntos ni guion)" required id="run" aria-describedby="error-run">
+                        <div id="error-run" class="invalid-feedback" aria-live="polite">
+                        </div>
                     </div>
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Apellidos (Max 100)" required>
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <label for="nombre-admin" class="form-label">
+                                Nombre
+                            </label>
+                            <input type="text" class="form-control" placeholder="Nombre (Max 50)" required id="nombre-admin" aria-describedby="error-nombre-admin">
+                            <div id="error-nombre-admin" class="invalid-feedback" aria-live="polite">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="apellidos-admin" class="form-label">
+                                Apellidos
+                            </label>
+                            <input type="text" class="form-control" placeholder="Apellidos (Max 100)" required id="apellidos-admin" aria-describedby="error-apellidos-admin">
+                            <div id="error-apellidos-admin" class="invalid-feedback" aria-live="polite">
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Correo (@duoc.cl, @gmail.com)" required>
-                </div>
-
-                <div class="row g-3 mb-3">
-                    <div class="col">
-                        <label class="form-label small text-muted mb-0">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control">
+                    <div class="mb-3">
+                        <label for="correo-admin" class="form-label">
+                            Correo electrónico
+                        </label>
+                        <input type="email" class="form-control" placeholder="Correo (@duoc.cl, @gmail.com)" required id="correo-admin" aria-describedby="error-correo-admin">
+                        <div id="error-correo-admin" class="invalid-feedback" aria-live="polite">
+                        </div>
                     </div>
-                    <div class="col">
-                        <label class="form-label small text-muted mb-0">Rol en el Sistema</label>
-                        <select class="form-select">
-                            <option value="Admin">Administrador</option>
-                            <option value="Vendedor">Vendedor</option>
-                            <option value="Cliente">Cliente</option>
-                        </select>
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <label for="nacimiento" class="form-label">
+                                Fecha de nacimiento
+                            </label>
+                            <input type="date" class="form-control" id="nacimiento" aria-describedby="error-nacimiento">
+                            <div id="error-nacimiento" class="invalid-feedback" aria-live="polite">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="rol" class="form-label">
+                                Rol
+                            </label>
+                            <select class="form-select" id="rol" aria-describedby="error-rol">
+                                <option value="Admin">
+                                    Administrador
+                                </option>
+                                <option value="Vendedor">
+                                    Vendedor
+                                </option>
+                                <option value="Cliente" selected>
+                                    Cliente
+                                </option>
+                            </select>
+                            <div id="error-rol" class="invalid-feedback" aria-live="polite">
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="row g-3 mb-3">
-                    <div class="col">
-                        <select class="form-select">
-                            <option>Región Metropolitana</option>
-                            <option>Valparaíso</option>
-                        </select>
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <label for="region-admin" class="form-label">
+                                Región
+                            </label>
+                            <select class="form-select" id="region-admin" aria-describedby="error-region-admin">
+                                <option>
+                                    Región Metropolitana
+                                </option>
+                                <option>
+                                    Valparaíso
+                                </option>
+                            </select>
+                            <div id="error-region-admin" class="invalid-feedback" aria-live="polite">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="comuna-admin" class="form-label">
+                                Comuna
+                            </label>
+                            <select class="form-select" id="comuna-admin" aria-describedby="error-comuna-admin">
+                                <option>
+                                    Santiago
+                                </option>
+                                <option>
+                                    Providencia
+                                </option>
+                            </select>
+                            <div id="error-comuna-admin" class="invalid-feedback" aria-live="polite">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <select class="form-select">
-                            <option>Santiago</option>
-                            <option>Providencia</option>
-                        </select>
+                    <div class="mb-3">
+                        <label for="direccion-admin" class="form-label">
+                            Dirección
+                        </label>
+                        <input type="text" class="form-control" placeholder="Dirección completa (Max 300)" required id="direccion-admin" aria-describedby="error-direccion-admin">
+                        <div id="error-direccion-admin" class="invalid-feedback" aria-live="polite">
+                        </div>
                     </div>
-                </div>
-
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Dirección completa (Max 300)" required>
-                </div>
-
-                <button type="submit" class="btn btn-danger w-100 fw-bold">Guardar Usuario</button>
-            </form>
-        </div>
-    </main>
-</body>
+                    <div class="mb-3">
+                        <label for="password-admin" class="form-label">
+                            Contraseña inicial (4 a 10 caracteres)
+                        </label>
+                        <input id="password-admin" name="password-admin" type="password" class="form-control" required minlength="4" maxlength="10" autocomplete="new-password" aria-describedby="error-password-admin">
+                        <div id="error-password-admin" class="invalid-feedback" aria-live="polite">
+                        </div>
+                    </div>
+                    <div id="estado-admin" role="status" class="mb-3">
+                    </div>
+                    <button type="submit" class="btn btn-danger w-100 fw-bold">
+                        Guardar Usuario
+                    </button>
+                </form>
+            </div>
+        </main>
+        <script src="scripts/formularios.js">
+        </script>
+        <script src="scripts/admin-usuario-form.js">
+        </script>
+    </body>
 </html>

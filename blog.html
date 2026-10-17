@@ -1,41 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Blogs - DeliveryApp</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-<body class="d-flex flex-column min-vh-100 bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">🍔 DeliveryApp</a>
-            <div class="d-flex gap-2 ms-auto"><a href="carrito.html" class="btn btn-light text-danger fw-bold">🛒 (<span id="cart-count">0</span>)</a></div>
-        </div>
-    </nav>
-    <main class="flex-grow-1 container py-5">
-        <h1 class="text-center mb-5 fw-bold">Noticias Importantes</h1>
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow-sm mb-4 flex-md-row">
-                    <img src="https://images.unsplash.com/photo-1513104890d38-7c7f5845cb65?w=300" class="card-img-left" style="width: 250px; object-fit: cover;" alt="Blog 1">
-                    <div class="card-body">
-                        <h2 class="card-title h4">Caso Curioso #1</h2>
-                        <p class="card-text text-muted">Descubre cómo la pizza Margarita se convirtió en un clásico mundial...</p>
-                        <a href="detalle-blog1.html" class="btn btn-danger">Leer más</a>
-                    </div>
-                </div>
-                <div class="card shadow-sm flex-md-row">
-                    <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=300" class="card-img-left" style="width: 250px; object-fit: cover;" alt="Blog 2">
-                    <div class="card-body">
-                        <h2 class="card-title h4">Caso Curioso #2</h2>
-                        <p class="card-text text-muted">El sushi no siempre fue como lo conocemos hoy en día...</p>
-                        <a href="detalle-blog2.html" class="btn btn-danger">Leer más</a>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>
+            Blogs - DeliveryApp
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="scripts/auth.js">
+        </script>
+        <script src="scripts/productos-store.js">
+        </script>
+    </head>
+    <body class="d-flex flex-column min-vh-100 bg-light">
+        <nav aria-label="Navegación principal" class="navbar navbar-expand-lg navbar-dark bg-danger">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="index.html">
+                    🍔 DeliveryApp
+                </a>
+                <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="navbar-toggler-icon">
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="productos.html">
+                                Productos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="nosotros.html">
+                                Nosotros
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="blog.html">
+                                Blogs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">
+                                Contacto
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="login.html" class="btn btn-outline-light">
+                            Iniciar Sesión
+                        </a>
+                        <a href="registro.html" class="btn btn-outline-light">
+                            Crear cuenta
+                        </a>
+                        <a href="carrito.html" class="btn btn-light text-danger fw-bold">
+                            🛒 (
+                            <span id="cart-count">
+                                0
+                            </span>
+                            )
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <footer class="bg-dark text-white text-center py-3"><p class="mb-0">&copy; 2024 DeliveryApp</p></footer>
-</body>
+        </nav>
+        <main class="flex-grow-1 container py-5">
+            <h1 class="text-center mb-5 fw-bold">
+                Noticias Importantes
+            </h1>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow-sm mb-4 flex-md-row">
+                        <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=1000&q=85" class="card-img-left" style="width: 250px; object-fit: cover;" alt="Fotografía de una pizza">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                Caso Curioso #1
+                            </h2>
+                            <p class="card-text text-muted">
+                                Descubre cómo la pizza Margarita se convirtió en un clásico mundial...
+                            </p>
+                            <a href="detalle-blog1.html" class="btn btn-danger">
+                                Leer más
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm flex-md-row">
+                        <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=300" class="card-img-left" style="width: 250px; object-fit: cover;" alt="Blog 2">
+                        <div class="card-body">
+                            <h2 class="card-title h4">
+                                Caso Curioso #2
+                            </h2>
+                            <p class="card-text text-muted">
+                                El sushi no siempre fue como lo conocemos hoy en día...
+                            </p>
+                            <a href="detalle-blog2.html" class="btn btn-danger">
+                                Leer más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-dark text-white text-center py-3">
+            <p class="mb-0">
+                &copy;
+                2024 DeliveryApp
+            </p>
+        </footer>
+        <script src="scripts/navegacion.js">
+        </script>
+    </body>
 </html>

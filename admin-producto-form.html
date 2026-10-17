@@ -1,37 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard - DeliveryApp</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="d-flex" style="height: 100vh; overflow: hidden;">
-    <aside class="bg-dark text-white p-3 d-flex flex-column" style="width: 250px;">
-        <h3 class="fw-bold mb-4 text-danger">Panel Admin</h3>
-        <nav class="nav flex-column gap-2">
-            <a class="nav-link text-white bg-danger rounded" href="admin-home.html">Dashboard</a>
-            <a class="nav-link text-white" href="admin-productos.html">Lista Productos</a>
-            <a class="nav-link text-white" href="admin-producto-form.html">Nuevo Producto</a>
-            <a class="nav-link text-white" href="admin-usuarios.html">Lista Usuarios</a>
-            <a class="nav-link text-white" href="admin-usuario-form.html">Nuevo Usuario</a>
-        </nav>
-        <a href="index.html" class="btn btn-outline-light mt-auto">← Volver a Tienda</a>
-    </aside>
-    <main class="flex-fill p-5 bg-light overflow-auto">
-        <h1 class="mb-4 fw-bold">Registrar Nuevo Producto</h1>
-        <div class="card shadow-sm p-4" style="max-width: 600px;">
-            <form>
-                <div class="mb-3"><input type="text" class="form-control" placeholder="Código (Min 3)" required></div>
-                <div class="mb-3"><input type="text" class="form-control" placeholder="Nombre (Max 100)" required></div>
-                <div class="mb-3"><textarea class="form-control" placeholder="Descripción (Max 500)"></textarea></div>
-                <div class="row g-3 mb-3">
-                    <div class="col"><input type="number" class="form-control" placeholder="Precio" required></div>
-                    <div class="col"><input type="number" class="form-control" placeholder="Stock" required></div>
-                </div>
-                <div class="mb-3"><select class="form-select"><option>Comida Rápida</option><option>Sushi</option></select></div>
-                <button type="submit" class="btn btn-danger w-100 fw-bold">Guardar Producto</button>
-            </form>
-        </div>
-    </main>
-</body>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>
+            Dashboard - DeliveryApp
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="scripts/auth.js">
+        </script>
+        <script src="scripts/productos-store.js">
+        </script>
+    </head>
+    <body class="d-flex" style="height: 100vh; overflow: hidden;">
+        <aside class="bg-dark text-white p-3 d-flex flex-column" style="width: 250px;">
+            <h3 class="fw-bold mb-4 text-danger">
+                Panel Admin
+            </h3>
+            <nav class="nav flex-column gap-2">
+                <a class="nav-link text-white bg-danger rounded" href="admin-home.html">
+                    Dashboard
+                </a>
+                <a class="nav-link text-white" href="admin-productos.html">
+                    Lista Productos
+                </a>
+                <a class="nav-link text-white" href="admin-producto-form.html">
+                    Nuevo Producto
+                </a>
+                <a class="nav-link text-white" href="admin-usuarios.html">
+                    Lista Usuarios
+                </a>
+                <a class="nav-link text-white" href="admin-usuario-form.html">
+                    Nuevo Usuario
+                </a>
+            </nav>
+            <a href="index.html" class="btn btn-outline-light mt-auto">
+                ← Volver a Tienda
+            </a>
+        </aside>
+        <main class="flex-fill p-5 bg-light overflow-auto">
+            <h1 class="mb-4 fw-bold">
+                Registrar Nuevo Producto
+            </h1>
+            <div class="card shadow-sm p-4" style="max-width: 600px;">
+                <form id="form-producto">
+                    <div class="mb-3">
+                        <label class="form-label" for="codigo">
+                            Código
+                        </label>
+                        <input class="form-control" id="codigo" type="text" required minlength="3" maxlength="30">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="nombre">
+                            Nombre
+                        </label>
+                        <input class="form-control" id="nombre" type="text" required maxlength="100">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="descripcion">
+                            Descripción
+                        </label>
+                        <input class="form-control" id="descripcion" type="text" maxlength="500">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="precio">
+                            Precio ($ CLP)
+                        </label>
+                        <input class="form-control" id="precio" type="number" required min="1" step="1">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="stock">
+                            Stock
+                        </label>
+                        <input class="form-control" id="stock" type="number" required min="0" step="1">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="imagen">
+                            URL de imagen (opcional)
+                        </label>
+                        <input class="form-control" id="imagen" type="url" >
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="categoria">
+                            Categoría
+                        </label>
+                        <select id="categoria" class="form-select" required>
+                            <option>
+                                Comida Rápida
+                            </option>
+                            <option>
+                                Pizzas
+                            </option>
+                            <option>
+                                Sushi
+                            </option>
+                            <option>
+                                Saludable
+                            </option>
+                        </select>
+                    </div>
+                    <p id="estado-producto" role="alert" class="text-danger">
+                    </p>
+                    <button id="guardar-producto" class="btn btn-danger" type="submit">
+                        Guardar producto
+                    </button>
+                    <a href="admin-productos.html" class="btn btn-secondary">
+                        Cancelar
+                    </a>
+                </form>
+            </div>
+        </main>
+        <script src="scripts/admin-producto-form.js">
+        </script>
+    </body>
 </html>

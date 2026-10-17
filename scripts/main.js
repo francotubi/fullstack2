@@ -1,46 +1,51 @@
-const productosDelivery = [
-    { id: 1, nombre: "Hamburguesa Doble Queso", categoria: "Comida Rápida", precio: 6500, imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" },
-    { id: 2, nombre: "Pizza Pepperoni", categoria: "Pizzas", precio: 12000, imagen: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500" },
-    { id: 3, nombre: "Sushi Roll Avocado", categoria: "Sushi", precio: 5500, imagen: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=500" },
-    { id: 4, nombre: "Ensalada César", categoria: "Saludable", precio: 4500, imagen: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=500" }
-];
-
-let carrito = JSON.parse(localStorage.getItem("carritoDelivery")) || [];
-
+let carrito = JSON.parse(localStorage.getItem('carritoDelivery') || '[]');
 function renderizarProductos() {
-    const contenedor = document.getElementById("product-container");
-    if(!contenedor) return;
-    contenedor.innerHTML = "";
-    productosDelivery.forEach(producto => {
-        contenedor.innerHTML += `
-            <div class="col-md-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}" style="height: 150px; object-fit: cover;">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">${producto.nombre}</h5>
-                        <p class="text-muted small mb-2">${producto.categoria}</p>
-                        <h6 class="text-success fw-bold mb-3">$${producto.precio}</h6>
-                        <button class="btn btn-danger mt-auto" onclick="agregarAlCarrito(${producto.id})">Añadir</button>
-                    </div>
-                </div>
-            </div>`;
+    const contenedor = document.getElementById('product-container');
+    if (!contenedor) return;
+    contenedor.replaceChildren();
+    Catalogo.listar().forEach(p => {
+        const col = document.createElement('div');
+        col.className = 'col-md-3';
+        col.innerHTML = '<div class="card h-100 shadow-sm border-0"><img class="card-img-top" style="height:150px;object-fit:cover"><div class="card-body d-flex flex-column"><h5 class="card-title fw-bold"></h5><p class="text-muted small mb-2"></p><h6 class="text-success fw-bold mb-3"></h6><a class="mb-2">Ver detalle</a><button class="btn btn-danger mt-auto" type="button"></button></div></div>';
+        const img = col.querySelector('img');
+        img.src = p.imagen || 'https://placehold.co/500x300?text=Producto';
+        img.alt = p.nombre;
+        col.querySelector('h5').textContent = p.nombre;
+        col.querySelector('p').textContent = p.categoria;
+        col.querySelector('h6').textContent = '$' + p.precio.toLocaleString('es-CL');
+        col.querySelector('a').href = 'detalle-producto.html?id=' + p.id;
+        const btn = col.querySelector('button');
+        btn.textContent = p.stock > 0 ? 'Añadir' : 'Sin stock';
+        btn.disabled = p.stock <= 0;
+        btn.addEventListener('click', () => agregarAlCarrito(p.id));
+        contenedor.append(col);
     });
 }
-
-function agregarAlCarrito(id) {
-    const prod = productosDelivery.find(p => p.id === id);
-    carrito.push(prod);
-    localStorage.setItem("carritoDelivery", JSON.stringify(carrito));
+function agregarAlCarrito(id, cantidad = 1) {
+    const prod = Catalogo.listar().find(p => p.id === id);
+    carrito = JSON.parse(localStorage.getItem('carritoDelivery') || '[]');
+    if (!prod || !Number.isInteger(cantidad) || cantidad < 1 || carrito.filter(p => p.id === id).length + cantidad > prod.stock) {
+        alert('Cantidad no disponible en stock.');
+        return;
+    }
+    for (let i = 0; i < cantidad; i++) carrito.push({
+        ...prod
+    });
+    localStorage.setItem('carritoDelivery', JSON.stringify(carrito));
     actualizarContadorCarrito();
-    alert(`¡${prod.nombre} añadido al carrito!`);
+    alert('Producto añadido al carrito.');
 }
-
 function actualizarContadorCarrito() {
-    const spans = document.querySelectorAll("#cart-count");
-    spans.forEach(span => span.textContent = carrito.length);
+    document.querySelectorAll('#cart-count').forEach(el => el.textContent = carrito.length);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    renderizarProductos();
-    actualizarContadorCarrito();
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        renderizarProductos();
+        actualizarContadorCarrito();
+    } catch (error) {
+        const box = document.createElement('p');
+        box.textContent = error.message;
+        box.className = 'alert alert-danger';
+        document.querySelector('main').prepend(box);
+    }
 });
